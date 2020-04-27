@@ -52,6 +52,7 @@ namespace words {
     // START OF CODE TO MODIFY
     /////////////////////////////////////////////////////////////////////////////
 
+    // Custom function to sort frequency list according to count of words
     struct sortFrequency
     {
         inline bool operator() (const word_frequency& word1, const word_frequency& word2)
@@ -90,6 +91,7 @@ namespace words {
                 }
             }
         }
+        // use custom function to sort frequency list
         std::sort(res.begin(), res.end(), sortFrequency());
         return res;
     }
@@ -128,8 +130,6 @@ namespace words {
                     {
                         flg1=1;
                         counts[k]=counts[k]+1;
-                        //if(counts[k]>1)
-                        //  std::cout<<words[k];
                         break;
                     }
                 }
@@ -146,12 +146,8 @@ namespace words {
             word_frequency cur=word_frequency(words[i],counts[i]);
             res.push_back(cur);
         }
-        // TODO: Write a definition for this function that actually
-        // works. That will include deleting the current return statement,
-        // which is just a placeholder to allow the code to compile. When
-        // you are done, delete this TODO comment.
         return res;
-        //return frequency_distribution();
+
     }
 
     frequency_distribution
@@ -171,7 +167,6 @@ namespace words {
             std::list<std::string>::iterator it;
             for(it=stop.begin();it!=stop.end();++it)
             {
-                //std::cout<<*it;
                 if(str==*it)
                 {
                     flg=1;
@@ -241,12 +236,6 @@ namespace words {
             word_frequency cur=word_frequency(it->first,it->second);
             res.push_back(cur);
         }
-
-
-        // TODO: Write a definition for this function that actually
-        // works. That will include deleting the current return statement,
-        // which is just a placeholder to allow the code to compile. When
-        // you are done, delete this TODO comment.
         return res;
     }
 
@@ -256,7 +245,6 @@ namespace words {
         Node* left;
         Node* right;
     };
-
 
     void search(Node*& root,std::string key,Node**& _result){
 
@@ -276,8 +264,6 @@ namespace words {
             search(root->right,key,_result);
         }
     }
-
-
 
     void insert(Node*& root,std::string word1){
         if(root==NULL){
@@ -301,19 +287,15 @@ namespace words {
         }
     }
 
-
     void copy(Node* root, frequency_distribution &res)
     {
         if(root==NULL)
             return;
         word_frequency cur=word_frequency(root->word,root->count);
         res.push_back(cur);
-        std::cout<<cur.count();
         copy(root->left,res);
         copy(root->right,res);
     }
-
-
 
     frequency_distribution
     tree_word_counter::count(
